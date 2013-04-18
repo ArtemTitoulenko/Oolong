@@ -1,0 +1,13 @@
+.app-container {
+  .sidebar {
+  }
+
+  .chat-window {
+    .message-box textarea {
+      border: 0;
+      position: fixed;
+      bottom: 0;
+      width: 500px;
+    }
+  }
+}
