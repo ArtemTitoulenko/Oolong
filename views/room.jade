@@ -4,8 +4,11 @@ block content
   .container.app-container
     .row
       .span3.sidebar
-        = user.name
+        = user.email
       .span9.chat-window
         .messages
         .message-box
           textarea
+
+  script(src="/socket.io/socket.io.js")
+  script(src="js/app.js")

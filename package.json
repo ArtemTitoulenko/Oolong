@@ -11,5 +11,8 @@
   , "jade": "*"
   , "socket.io": "*"
   , "hamljs": "*"
+  , "passport": "*"
+  , "passport-local": "*"
+  , "underscore": "*"
   }
 }
