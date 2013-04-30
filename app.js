@@ -75,6 +75,11 @@ app.post('/login'
                             res.redirect('/room')
                           })
 
+app.get('/logout', function (req,res) {
+  req.logout()
+  res.redirect('/')
+})
+
 var chat = io
   .of('/chat')
   .on('connection', function (socket) {

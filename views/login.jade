@@ -1,7 +1,13 @@
+extends layout
+
 block content
-  form(method="post", action="/login")
-    input(type="text", name="username", placeholder="email")
-
-    input(type="password", name="password", placeholder="password")
-
-    input(type="submit", value="login")
+  .login-container
+    .login
+      //- h1 Login
+      form(method="post", action="/login")
+        p
+          input(type="text", name="username", placeholder="email")
+        p
+          input(type="password", name="password", placeholder="password")
+        p.submit
+          input.btn.btn-primary.btn-large.btn-block(type="submit", value="Login")
