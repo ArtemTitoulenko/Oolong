@@ -6,7 +6,7 @@ $(document).ready(function () {
   messageBox.autosize()
 
   // connect to the chat socket
-  var chat = io.connect('http://localhost/chat')
+  var chat = io.connect('http://' + __oolong__wshost + '/chat')
 
   messageBox.bind('enterKey', function (e) {
     e.preventDefault()

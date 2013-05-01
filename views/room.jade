@@ -1,13 +1,15 @@
 extends layout
 
 block headers
-  link(href="css/room.css", rel="stylesheet")
+  link(href="/css/room.css", rel="stylesheet")
+
+  script(type="text/javascript") var __oolong__wshost = "#{host}"
 
 block footers
   script(src="/socket.io/socket.io.js")
-  script(src="components/jquery/jquery.js", type="text/javascript")
-  script(src="components/jquery-autosize/jquery.autosize.js", type="text/javascript")
-  script(src="js/app.js", type="text/javascript")
+  script(src="/components/jquery/jquery.js", type="text/javascript")
+  script(src="/components/jquery-autosize/jquery.autosize.js", type="text/javascript")
+  script(src="/js/app.js", type="text/javascript")
 
 block content
   .app-container
