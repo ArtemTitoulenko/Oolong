@@ -1,0 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps);
+.app-container {
+  width: 100%;
+  overflow: hidden;
+  background: #ecf0f1; }
+  .app-container .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: #ddd; }
+    .app-container .sidebar h1 {
+      text-align: center;
+      font-family: 'Oleo Script Swash Caps', cursive;
+      font-size: 5em;
+      color: #34495e; }
+  .app-container .chat-window {
+    width: 710px;
+    margin-left: 250px; }
+    .app-container .chat-window .message-box textarea {
+      position: fixed;
+      bottom: 0;
+      font-size: 22px; }

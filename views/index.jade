@@ -1,2 +1,12 @@
-block content2
-  h1 Welcome
+extends layout
+
+block headers
+  link(href="css/index.css", rel="stylesheet")
+
+block content
+  .welcome-container
+    .header
+      h1 Oolong
+    .subheader
+      h2 A casual chat room for the net
+      a(href="login") Login

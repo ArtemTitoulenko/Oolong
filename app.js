@@ -36,6 +36,7 @@ app.set('users'
       { password: 'foo', email: 'artem@obvious.com', id: 1 }
     , { password: 'bar', email: 'maltz@yelp.com', id: 2}
     , { password: 'baz', email: 'grardb@etsy.com', id: 3}
+    , { password: 'cats', email: 'kruzinov@gmail.com', id: 4}
 ])
 
 // Passport configuration

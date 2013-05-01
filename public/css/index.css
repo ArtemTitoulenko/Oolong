@@ -1,0 +1,48 @@
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps);
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+.welcome-container {
+  margin: 100px auto;
+  width: 960px; }
+  .welcome-container .header {
+    position: relative;
+    margin: 0 auto;
+    padding: 0px 20px 20px;
+    width: 940px; }
+    .welcome-container .header h1 {
+      color: #34495e;
+      font-size: 23em;
+      text-align: center;
+      font-family: 'Oleo Script Swash Caps', cursive;
+      font-weight: 400;
+      margin: 0; }
+  .welcome-container .subheader {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px 20px 20px;
+    width: 540px;
+    text-align: center; }
+    .welcome-container .subheader h2 {
+      color: #7f8c8d;
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 2em;
+      font-weight: 100; }
+    .welcome-container .subheader a {
+      width: 302px;
+      padding: 5px 10px;
+      height: 34px;
+      font-size: 20px;
+      color: #34495e;
+      background: #ecf0f1;
+      border: 1px solid;
+      border-color: #ecf0f1;
+      border-radius: 5px;
+      outline: 0;
+      font-weight: 700;
+      text-decoration: none;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box; }
+      .welcome-container .subheader a:hover {
+        background: #1abc9c;
+        border-color: #1abc9c;
+        color: #fff; }

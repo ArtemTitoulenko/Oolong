@@ -1,9 +1,5 @@
 @import url("http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic");
 body {
+  padding: 0;
+  margin: 0;
   font: 14px/1.231 "Lato", sans-serif; }
-
-.app-container .chat-window .message-box textarea {
-  border: 0;
-  position: fixed;
-  bottom: 0;
-  width: 500px; }
