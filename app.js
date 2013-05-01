@@ -36,7 +36,7 @@ app.set('users'
       { password: 'foo', email: 'artem@obvious.com', id: 1 }
     , { password: 'bar', email: 'maltz@yelp.com', id: 2}
     , { password: 'baz', email: 'grardb@etsy.com', id: 3}
-    , { password: 'cats', email: 'kruzinov@gmail.com', id: 4}
+    , { password: 'cats', email: 'kruzinova@gmail.com', id: 4}
 ])
 
 // Passport configuration
@@ -84,7 +84,7 @@ app.get('/logout', function (req,res) {
 var chat = io
   .of('/chat')
   .on('connection', function (socket) {
-  socket.on('message', function (data) {
+  socket.on('messageSent', function (data) {
     chat.emit('message', {text: data.text})
   })
 })

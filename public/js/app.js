@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  var messages = $('.messages')
-    , messageBox = $('.message-box textarea')
+  var messages = $('.chat-window .messages')
+    , messageBox = $('.chat-window .message-box textarea')
 
   // autoresize the text area when text starts to fill it up
   messageBox.autosize()
@@ -9,7 +9,8 @@ $(document).ready(function () {
   var chat = io.connect('http://localhost/chat')
 
   messageBox.bind('enterKey', function (e) {
-    chat.emit('message', {text: $(messageBox).val()})
+    e.preventDefault()
+    chat.emit('messageSent', {text: $(messageBox).val()})
     $(messageBox).val('')
   })
 
