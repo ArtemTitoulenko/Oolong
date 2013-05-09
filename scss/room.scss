@@ -1,6 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps);
 
 .app-container {
+  $sidebar_width: 350px;
+
   width: 100%;
   overflow: hidden;
   background: #ecf0f1;
@@ -9,7 +11,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
+    width: $sidebar_width;
     height: 100%;
     background: #ddd;
 
@@ -19,11 +21,34 @@
       font-size: 5em;
       color: #34495e;
     }
+
+    .user_fragment {
+      $fragment_height: 80px;
+      $image_size: 50px;
+      $text_height: 16px;
+
+      height: $fragment_height;
+      line-height: $fragment_height;
+
+      .profile_picture {
+        float: right;
+        img {
+          margin: (($fragment_height - $image_size)/2) 20px;
+          height: $image_size;
+          width: $image_size;
+          border-radius: 999px;
+        }
+      }
+
+      .information {
+        float: right;
+        font-size: $text_height;
+      }
+    }
   }
 
   .chat-window {
-    width: 710px;
-    margin-left: 250px;
+    margin-left: $sidebar_width;
 
     .messages {
 

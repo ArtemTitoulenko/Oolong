@@ -7,7 +7,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
+    width: 350px;
     height: 100%;
     background: #ddd; }
     .app-container .sidebar h1 {
@@ -15,9 +15,21 @@
       font-family: 'Oleo Script Swash Caps', cursive;
       font-size: 5em;
       color: #34495e; }
+    .app-container .sidebar .user_fragment {
+      height: 80px;
+      line-height: 80px; }
+      .app-container .sidebar .user_fragment .profile_picture {
+        float: right; }
+        .app-container .sidebar .user_fragment .profile_picture img {
+          margin: 15px 20px;
+          height: 50px;
+          width: 50px;
+          border-radius: 999px; }
+      .app-container .sidebar .user_fragment .information {
+        float: right;
+        font-size: 16px; }
   .app-container .chat-window {
-    width: 710px;
-    margin-left: 250px; }
+    margin-left: 350px; }
     .app-container .chat-window .message-box textarea {
       position: fixed;
       bottom: 0;
