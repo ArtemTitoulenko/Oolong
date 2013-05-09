@@ -15,7 +15,9 @@ block content
   .app-container
     .sidebar
       h1 O
-      = user.email
+      p
+        img(src=user.photo)
+        = user.email
     .chat-window
       .messages
       .message-box

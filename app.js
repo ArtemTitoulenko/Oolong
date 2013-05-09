@@ -72,22 +72,9 @@ app.get('/login', routes.login)
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
   if (req.user.photo == null) {
     md5dgst.update(req.user.email)
-    var d = md5dgst.digest('hex')
-    
-    http.get('http://www.gravatar.com/' + d + '.json', function (get_result) {
-      if (get_result.statusCode == 200) {
-        var user = JSON.parse(get_result.body);
-        
-        console.log('got a 200')
-        req.user.photo = user.entry[0].thumbnailUrl;
-        console.log('setting ' + req.user.email + '\'s photo to: ' + req.user.photo)
-      } else {
-        console.log('result: ')
-        console.dir(get_result.body)
-      }
-    })
+    req.user.photo = 'http://gravatar.com/avatar/' + md5dgst.digest('hex')
   }
-
+  
   res.redirect('/room')
 })
 
