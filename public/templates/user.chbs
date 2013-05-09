@@ -10,15 +10,15 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n  <div class=\"profile_picture\">\n    <img src=\"";
+    + "\">\n  <img class=\"profile_image\" src=\"";
   if (stack1 = helpers.photo) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.photo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\"/>\n  </div>\n  \n  <div class=\"information\">\n    <div class=\"email\">\n      <span>";
+    + "\"/>\n\n  <div class=\"information\">\n    <div class=\"email\">\n      <span>";
   if (stack1 = helpers.email) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.email; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</span>\n    </div>\n  </div>\n</div>";
+    + "</span>\n    </div>\n  </div>\n</div>\n";
   return buffer;
   });
 })();

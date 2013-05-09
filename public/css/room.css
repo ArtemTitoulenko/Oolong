@@ -18,13 +18,12 @@
     .app-container .sidebar .user_fragment {
       height: 80px;
       line-height: 80px; }
-      .app-container .sidebar .user_fragment .profile_picture {
-        float: right; }
-        .app-container .sidebar .user_fragment .profile_picture img {
-          margin: 15px 20px;
-          height: 50px;
-          width: 50px;
-          border-radius: 999px; }
+      .app-container .sidebar .user_fragment img.profile_image {
+        float: right;
+        margin: 10px 20px;
+        height: 60px;
+        width: 60px;
+        border-radius: 30px; }
       .app-container .sidebar .user_fragment .information {
         float: right;
         font-size: 16px; }

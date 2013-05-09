@@ -24,20 +24,18 @@
 
     .user_fragment {
       $fragment_height: 80px;
-      $image_size: 50px;
+      $image_size: 60px;
       $text_height: 16px;
 
       height: $fragment_height;
       line-height: $fragment_height;
 
-      .profile_picture {
+      img.profile_image {
         float: right;
-        img {
-          margin: (($fragment_height - $image_size)/2) 20px;
-          height: $image_size;
-          width: $image_size;
-          border-radius: 999px;
-        }
+        margin: (($fragment_height - $image_size)/2) 20px;
+        height: $image_size;
+        width: $image_size;
+        border-radius: $image_size / 2;
       }
 
       .information {
