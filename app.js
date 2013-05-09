@@ -86,8 +86,9 @@ app.get('/logout', function (req,res) {
 var chat = io
   .of('/chat')
   .on('connection', function (socket) {
-  socket.on('messageSent', function (data) {
-    chat.emit('message', {text: data.text})
+  
+  socket.on('message.sent', function (data) {
+    chat.emit('message.received', {text: data.text})
   })
 })
 

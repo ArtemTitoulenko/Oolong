@@ -4,20 +4,25 @@ block headers
   link(href="/css/room.css", rel="stylesheet")
 
   script(type="text/javascript") var __oolong__wshost = "#{host}"
-
+  script
+    var USER_SESSION = !{JSON.stringify(user)}
+  
 block footers
   script(src="/socket.io/socket.io.js")
   script(src="/components/jquery/jquery.js", type="text/javascript")
   script(src="/components/jquery-autosize/jquery.autosize.js", type="text/javascript")
+  script(src="/components/handlebars.js/handlebars.js", type="text/javascript")
+  
+  //- handlebars templates
+  script(type="text/javascript", src="/templates/user.chbs")
+  
   script(src="/js/app.js", type="text/javascript")
 
 block content
   .app-container
     .sidebar
       h1 O
-      p
-        img(src=user.photo)
-        = user.email
+      .users
     .chat-window
       .messages
       .message-box
