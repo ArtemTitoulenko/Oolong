@@ -7,8 +7,6 @@ exports.login = function (req, res) {
 }
 
 exports.room = function (req, res) {
-  console.log('user: ' + req.user)
   var user = req.user
-
   res.render('room', {user: req.user, host: req.headers.host})
 }

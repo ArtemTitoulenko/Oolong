@@ -1,4 +1,6 @@
 var express = require('express')
+  , crypto = require('crypto')
+  , md5dgst = crypto.createHash('md5')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
@@ -6,6 +8,7 @@ var express = require('express')
   , _ = require('underscore')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
+
 
 var app = express()
   , server = http.Server(app)
@@ -33,7 +36,7 @@ if ('development' == app.get('env')) {
 
 app.set('users'
   , [
-      { password: 'foo', email: 'artem@obvious.com', id: 1 }
+      { password: 'foo', email: 'artem.titoulenko@gmail.com', id: 1 }
     , { password: 'bar', email: 'maltz@yelp.com', id: 2}
     , { password: 'baz', email: 'grardb@etsy.com', id: 3}
     , { password: 'cats', email: 'kruzinova@gmail.com', id: 4}
@@ -42,7 +45,6 @@ app.set('users'
 // Passport configuration
 passport.use(new LocalStrategy(
   function (email, password, done) {
-    console.log('checking ' + email + ', ' + password)
     var user = _.findWhere(app.get('users'), {email: email, password: password})
 
     if ( _.isObject(user) ) {
@@ -59,8 +61,6 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   var user = _.findWhere(app.get('users'), {id: id})
-  console.log('found user ')
-  console.dir(user)
   done(null, user)
 })
 
@@ -69,12 +69,27 @@ app.get('/', routes.index);
 app.get('/room', ensureAuthenticated, routes.room);
 
 app.get('/login', routes.login)
-app.post('/login'
-  , passport.authenticate(  'local'
-                          , { failureRedirect: '/login' })
-                          , function (req, res) {
-                            res.redirect('/room')
-                          })
+app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
+  if (req.user.photo == null) {
+    md5dgst.update(req.user.email)
+    var d = md5dgst.digest('hex')
+    
+    http.get('http://www.gravatar.com/' + d + '.json', function (get_result) {
+      if (get_result.statusCode == 200) {
+        var user = JSON.parse(get_result.body);
+        
+        console.log('got a 200')
+        req.user.photo = user.entry[0].thumbnailUrl;
+        console.log('setting ' + req.user.email + '\'s photo to: ' + req.user.photo)
+      } else {
+        console.log('result: ')
+        console.dir(get_result.body)
+      }
+    })
+  }
+
+  res.redirect('/room')
+})
 
 app.get('/logout', function (req,res) {
   req.logout()
