@@ -2,7 +2,8 @@
   "name": "oolong",
   "version": "0.0.0",
   "dependencies": {
-    "flat-ui": "latest",
+    "handlebars": "latest",
+    "jquery": "latest",
     "jquery-autosize": "~1.16.7"
   }
 }
