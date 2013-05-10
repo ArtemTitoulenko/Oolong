@@ -3,8 +3,8 @@ extends layout
 block headers
   link(href="/css/room.css", rel="stylesheet")
 
-  script(type="text/javascript") var __oolong__wshost = "#{host}"
-  script
+  script(type="text/javascript")
+    var __oolong__wshost = "#{host}"
     var USER_SESSION = !{JSON.stringify(user)}
 
 block footers
