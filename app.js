@@ -1,6 +1,5 @@
 var express = require('express')
   , crypto = require('crypto')
-  , md5dgst = crypto.createHash('md5')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
@@ -71,10 +70,12 @@ app.get('/room', ensureAuthenticated, routes.room);
 app.get('/login', routes.login)
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
   if (req.user.photo == null) {
+    var md5dgst = crypto.createHash('md5')
+
     md5dgst.update(req.user.email)
     req.user.photo = 'http://gravatar.com/avatar/' + md5dgst.digest('hex')
   }
-  
+
   res.redirect('/room')
 })
 
@@ -83,12 +84,48 @@ app.get('/logout', function (req,res) {
   res.redirect('/')
 })
 
+var connected_users = [];
+
 var chat = io
   .of('/chat')
   .on('connection', function (socket) {
-  
+
+  socket.on('user.ping', function (id, fn) {
+    var user = _.findWhere(app.get('users'), {id: id})
+
+    if (user === null) {
+      fn(false)
+      socket.close()
+    }
+
+    console.log('user exists')
+    console.dir(user)
+    console.dir(connected_users)
+
+    if (!_.contains(connected_users, user)) {
+      socket.set('user', user, function () {
+        connected_users.push(user)
+        console.dir(connected_users)
+        chat.emit('user.list', connected_users)
+      })
+    } else {
+      fn(false)
+    }
+  })
+
   socket.on('message.sent', function (data) {
-    chat.emit('message.received', {text: data.text})
+    chat.emit('message.received', {text: data.text, user: data.user})
+  })
+
+  socket.on('disconnect', function () {
+    socket.get('user', function (err, user) {
+      console.log(user.email + ' is leaving')
+      connected_users = _.without(connected_users, user)
+
+      console.dir(connected_users)
+
+      chat.emit('user.list', connected_users)
+    })
   })
 })
 
