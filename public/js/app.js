@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   messageBox.bind('enterKey', function (e) {
     e.preventDefault()
-    chat.emit('message.sent', {text: $(messageBox).val(), user: USER_SESSION})
+    chat.emit('message.sent', {text: $(messageBox).val(), user: __oolong__user_session})
     $(messageBox).val('')
   })
 
@@ -23,7 +23,7 @@ $(document).ready(function () {
   })
 
   chat.on('connect', function () {
-    chat.emit('user.ping', USER_SESSION.id, function (confirmation) {
+    chat.emit('user.ping', __oolong__user_session.id, function (confirmation) {
       if (confirmation !== true) {
         console.error('could not authenticate')
       }
@@ -34,17 +34,19 @@ $(document).ready(function () {
     users.empty()
 
     for (var user in user_list) {
-      console.log('adding '+ user_list[user].email)
       users.append(user_template(user_list[user]))
     }
   })
 
-  //
-  // chat.on('user.left', function (user_id) {
-  //   $('div [data-user-id='+user_id+']')
-  // })
+  chat.on('user.left', function (user_id) {
+    $('div [data-user-id='+user_id+']').remove()
+  })
+
+  chat.on('user.join', function (user) {
+    users.append(user_template(user))
+  })
 
   chat.on('message.received', function (data) {
-    messages.append('<p>' + data.user.email + ': ' + data.text + '</p>')
+    messages.append('<p><b>' + data.user.name + ':</b> ' + data.text + '</p>')
   })
 })

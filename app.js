@@ -6,7 +6,7 @@ var express = require('express')
   , path = require('path')
   , _ = require('underscore')
   , passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+  , LocalStrategy = require('passport-local').Strategy
 
 
 var app = express()
@@ -14,31 +14,31 @@ var app = express()
   , io = require('socket.io').listen(server)
 
 // all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(express.cookieParser());
-app.use(express.session({secret: '460ddf6eb1ea6353dedefbb435067e6a5a46ba4b'}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', process.env.PORT || 3000)
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jade')
+app.use(express.favicon())
+app.use(express.logger('dev'))
+app.use(express.bodyParser())
+app.use(express.methodOverride())
+app.use(express.cookieParser())
+app.use(express.session({secret: '460ddf6eb1ea6353dedefbb435067e6a5a46ba4b'}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(app.router)
+app.use(express.static(path.join(__dirname, 'public')))
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+  app.use(express.errorHandler())
 }
 
 app.set('users'
   , [
-      { password: 'foo', email: 'artem.titoulenko@gmail.com', id: 1 }
-    , { password: 'bar', email: 'maltz@yelp.com', id: 2}
-    , { password: 'baz', email: 'grardb@etsy.com', id: 3}
-    , { password: 'cats', email: 'kruzinova@gmail.com', id: 4}
+      { password: 'foo', email: 'artem.titoulenko@gmail.com', name: 'Artem', id: 1 }
+    , { password: 'bar', email: 'maltz@yelp.com', name: 'Jon', id: 2}
+    , { password: 'baz', email: 'grardb@etsy.com', name: 'Gerard', id: 3}
+    , { password: 'cats', email: 'kruzinova@gmail.com', name: 'Karina', id: 4}
 ])
 
 // Passport configuration
@@ -64,8 +64,8 @@ passport.deserializeUser(function(id, done) {
 })
 
 // Actual routes
-app.get('/', routes.index);
-app.get('/room', ensureAuthenticated, routes.room);
+app.get('/', routes.index)
+app.get('/room', ensureAuthenticated, routes.room)
 
 app.get('/login', routes.login)
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
@@ -84,7 +84,7 @@ app.get('/logout', function (req,res) {
   res.redirect('/')
 })
 
-var connected_users = [];
+var connected_users = []
 
 var chat = io
   .of('/chat')
@@ -98,15 +98,11 @@ var chat = io
       socket.close()
     }
 
-    console.log('user exists')
-    console.dir(user)
-    console.dir(connected_users)
-
     if (!_.contains(connected_users, user)) {
       socket.set('user', user, function () {
         connected_users.push(user)
-        console.dir(connected_users)
-        chat.emit('user.list', connected_users)
+        socket.emit('user.list', connected_users)
+        socket.broadcast.emit('user.join', user)
       })
     } else {
       fn(false)
@@ -124,16 +120,16 @@ var chat = io
 
       console.dir(connected_users)
 
-      chat.emit('user.list', connected_users)
+      chat.emit('user.left', user.id)
     })
   })
 })
 
 server.listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+  console.log('Express server listening on port ' + app.get('port'))
+})
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+  if (req.isAuthenticated()) { return next() }
   res.redirect('/login')
 }
