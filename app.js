@@ -100,9 +100,11 @@ var chat = io
 
     if (!_.contains(connected_users, user)) {
       socket.set('user', user, function () {
-        connected_users.push(user)
+        var clean_user = _.omit(user, 'password')
+
+        connected_users.push(clean_user)
         socket.emit('user.list', connected_users)
-        socket.broadcast.emit('user.join', user)
+        socket.broadcast.emit('user.join', clean_user)
       })
     } else {
       fn(false)

@@ -1,3 +1,5 @@
+var _ = require('underscore')
+
 exports.index = function(req, res){
   res.render('index')
 }
@@ -7,6 +9,6 @@ exports.login = function (req, res) {
 }
 
 exports.room = function (req, res) {
-  var user = req.user
-  res.render('room', {user: req.user, host: req.headers.host})
+  var user = _.omit(req.user, 'password')
+  res.render('room', {user: user, host: req.headers.host})
 }

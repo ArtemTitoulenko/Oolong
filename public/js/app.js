@@ -34,7 +34,13 @@ $(document).ready(function () {
     users.empty()
 
     for (var user in user_list) {
-      users.append(user_template(user_list[user]))
+      (function (user) {
+        var compiled_user = user_template(user)
+
+        $('img', compiled_user).bind('load', function () {
+          users.append(compiled_user)
+        })
+      })(user_list[user])
     }
   })
 
@@ -43,7 +49,11 @@ $(document).ready(function () {
   })
 
   chat.on('user.join', function (user) {
-    users.append(user_template(user))
+    var compiled_user = user_template(user)
+
+    $('img', compiled_user).bind('load', function () {
+      users.append(compiled_user)
+    })
   })
 
   chat.on('message.received', function (data) {
